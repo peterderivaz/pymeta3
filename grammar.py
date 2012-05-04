@@ -28,12 +28,13 @@ class OMeta(OMetaBase):
     
     makeGrammar = classmethod(makeGrammar)
 
-# token('#') (~vspace anything)* vspace
+# 
           
 ometaGrammar = r"""
 hspace = (' ' | '\t')
 vspace = ("\r\n" | '\r' | '\n')
-emptyline =  hspace* vspace
+emptyline = token('#') (~vspace anything)* vspace
+          | hspace* vspace
 indentation = emptyline* hspace+
 noindentation = emptyline* ~hspace
 
