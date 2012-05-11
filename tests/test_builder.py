@@ -337,3 +337,6 @@ class PythonWriterTests(unittest.TestCase):
                                     self.considerError(lastError)
                                     return (_G_exactly_1, self.currentError)
                             """))
+
+if __name__ == '__main__':
+    unittest.main()

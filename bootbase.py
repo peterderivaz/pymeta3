@@ -28,11 +28,11 @@ class BootBaseTraits(object):
         args = []
         while True:
             try:
-                (arg, endchar), err = self.pythonExpr(" )")
+                (arg, endchar), err = self.pythonExpr(" )}")
                 if not arg:
                     break
                 args.append(self.builder.expr(arg))
-                if endchar == ')':
+                if endchar == ')' or endchar == '}':
                     break
             except _MaybeParseError:
                 break

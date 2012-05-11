@@ -25,13 +25,18 @@ This was ported to Python by Allen Short.  (Called PyMeta)
 Some useful syntax updates were made by Waldemar Kornewald.  (Called PyMeta2)
 
 This version contains some additional minor changes that I find useful:
-1)	Instead of writing 
-		token("(") 
+1) Instead of writing 
+        token("(") 
     you can write
         #(         
 
-2)	You can also add comments in Python style via
-	    # This is a comment
+2) You can also add comments in Python style via
+        # This is a comment
+        
+3) You can match a given number of repetitions of a pattern, e.g.
+        expr{4}
+   This is especially useful when parsing binary formats where the number of entries in a list is given as part of the stream, e.g.
+        num:x expr{x}
 
 
 How It Works
@@ -58,6 +63,8 @@ Basic syntax
   Match expr zero or more times, returning a list of matches.
 ``expr+``
   Match expr one or more times, returning a list of matches.
+``expr{pythonExpression}``
+  Match expr pythonExpression times, returning a list of matches.
 ``expr?``
   Try to match expr. Returns None if it fails to match.
 ``~expr``

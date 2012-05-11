@@ -81,7 +81,8 @@ expr2 = token('~') (token('~') expr2:e -> self.builder.lookahead(e)
                        |expr2:e -> self.builder._not(e))
           |expr1
 
-expr3 = (expr2:e ('*' -> self.builder.many(e)
+expr3 = (expr2:e (     '{' !(self.applicationArgs()):args -> self.builder.manyn(e,*args)
+                      |'*' -> self.builder.many(e)
                       |'+' -> self.builder.many1(e)
                       |'?' -> self.builder.optional(e)
                       | -> e)):r
@@ -128,6 +129,7 @@ opt = ( ['Apply' :ruleName :codeName [anything*:exprs]] -> self.builder.apply(ru
       | ['MatchString' :expr]       -> self.builder.match_string(expr)
       | ['Many' opt:expr]       -> self.builder.many(expr)
       | ['Many1' opt:expr]      -> self.builder.many1(expr)
+      | ['Manyn' opt:e opt:v]   -> self.builder.manyn(e,v)
       | ['Optional' opt:expr]   -> self.builder.optional(expr)
       | ['Or' [opt*:exprs]]     -> self.builder._or(exprs)
       | ['And' [opt*:exprs]]    -> self.builder.sequence(exprs)

@@ -518,3 +518,6 @@ class NullOptimizerTest(OMetaTestCase):
         tree, err = opt.apply("grammar")
         grammarClass = moduleFromGrammar(tree, 'TestGrammar', OMetaBase, {})
         return HandyWrapper(grammarClass)
+
+if __name__ == '__main__':
+    unittest.main()

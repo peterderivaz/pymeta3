@@ -399,6 +399,16 @@ class OMetaBase(object):
                 self.input = m
                 break
         return ans, e
+        
+    def manyn(self, fn, value):
+        """
+        Call C{fn} <value> times. Collect the resulting values into a list.
+
+        @param fn: A callable of no arguments.
+        @param value: Number of times to call the function.
+        """
+        ans = [fn()[0] for x in xrange(value)]
+        return ans, self.input.nullError() # Is this the correct return value?
 
     def _or(self, fns):
         """

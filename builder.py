@@ -30,6 +30,9 @@ class TreeBuilder(object):
 
     def many1(self, expr):
         return ["Many1", expr]
+        
+    def manyn(self, expr, value):
+        return ["Manyn", expr, value]
 
     def optional(self, expr):
         return ["Optional", expr]
@@ -176,6 +179,14 @@ class PythonWriter(object):
         """
         fname = self._newThunkFor("many", expr)
         return self._expr('many', 'self.many(%s)' % (fname,))
+    
+    
+    def generate_Manyn(self, expr, value):
+        """
+        Create a call to self.manyn(lambda: expr, lambda: value).
+        """
+        fname = self._newThunkFor("manyn", expr)
+        return self._expr('manyn', 'self.manyn(%s,%s)' % (fname,self._generateNode(value)))
 
 
     def generate_Many1(self, expr):
@@ -332,4 +343,6 @@ def moduleFromGrammar(tree, className, superclass, globalsDict):
     mod.__dict__[className].globals = globalsDict
     sys.modules[modname] = mod
     linecache.getlines(filename, mod.__dict__)
-    return mod.__dict__[className]
+    cls = mod.__dict__[className]
+    cls.source = source
+    return cls

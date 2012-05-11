@@ -289,3 +289,6 @@ class RuntimeTests(unittest.TestCase):
         o = OMetaBase([["a"]])
         v, e = o.listpattern(lambda: o.exactly("a"))
         self.assertEqual((v, e), (["a"], [0, None]))
+
+if __name__ == '__main__':
+    unittest.main()
