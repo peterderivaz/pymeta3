@@ -1,4 +1,4 @@
-# -*- test-case-name: pymeta.test.test_builder -*-
+# -*- test-case-name: pymeta3.test.test_builder -*-
 from types import ModuleType as module
 import linecache, sys
 

@@ -1,6 +1,6 @@
-from pymeta.builder import TreeBuilder, moduleFromGrammar
-from pymeta.grammar import OMetaGrammar
-from pymeta.runtime import _MaybeParseError, OMetaBase, EOFError
+from pymeta3.builder import TreeBuilder, moduleFromGrammar
+from pymeta3.grammar import OMetaGrammar
+from pymeta3.runtime import _MaybeParseError, OMetaBase, EOFError
 from textwrap import dedent
 import unittest
 
@@ -433,7 +433,7 @@ class MakeGrammarTest(unittest.TestCase):
     def test_makeGrammar(self):
         #imported here to prevent OMetaGrammar from being constructed before
         #tests are run
-        from pymeta.grammar import OMeta
+        from pymeta3.grammar import OMeta
         results = []
         grammar = dedent("""
         digit = :x ?('0' <= x <= '9') -> int(x)
@@ -451,7 +451,7 @@ class MakeGrammarTest(unittest.TestCase):
         A subclass of an OMeta subclass should be able to call rules on its
         parent.
         """
-        from pymeta.grammar import OMeta
+        from pymeta3.grammar import OMeta
 
         grammar1 = dedent("""
         dig = :x ?('0' <= x <= '9') -> int(x)
@@ -471,7 +471,7 @@ class MakeGrammarTest(unittest.TestCase):
         """
         Rules can call the implementation in a superclass.
         """
-        from pymeta.grammar import OMeta
+        from pymeta3.grammar import OMeta
         grammar1 = "expr = letter"
         TestGrammar1 = OMeta.makeGrammar(grammar1, {})
         grammar2 = "expr = super | digit"
@@ -494,7 +494,7 @@ class SelfHostingTest(OMetaTestCase):
         #imported here to prevent OMetaGrammar from being constructed before
         #tests are run
         if self.classTested is None:
-            from pymeta.grammar import OMetaGrammar
+            from pymeta3.grammar import OMetaGrammar
             self.classTested = OMetaGrammar
 
 
@@ -510,7 +510,7 @@ class NullOptimizerTest(OMetaTestCase):
 
         @param grammar: A string containing an OMeta grammar.
         """
-        from pymeta.grammar import OMetaGrammar, NullOptimizer
+        from pymeta3.grammar import OMetaGrammar, NullOptimizer
         g = OMetaGrammar(dedent(grammar))
         tree = g.parseGrammar('TestGrammar', TreeBuilder)
         opt = NullOptimizer([tree])

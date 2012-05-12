@@ -1,4 +1,4 @@
-from pymeta.bootbase import BootBase as GrammarBase
+from pymeta3.bootbase import BootBase as GrammarBase
 import string
 class BootOMetaGrammar(GrammarBase):
     globals = globals()

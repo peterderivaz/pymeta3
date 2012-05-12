@@ -1,4 +1,4 @@
-from pymeta.builder import TreeBuilder, writePython as writePython_orig
+from pymeta3.builder import TreeBuilder, writePython as writePython_orig
 from textwrap import dedent
 import unittest
 
